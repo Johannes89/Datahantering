@@ -9,8 +9,8 @@
 warning 6002: The table/view 'Datahantering.dbo.movie_actor' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="movie_actor">
           <Key>
-            <PropertyRef Name="movieID" />
             <PropertyRef Name="Actor" />
+            <PropertyRef Name="movieID" />
           </Key>
           <Property Name="movieID" Type="int" Nullable="false" />
           <Property Name="Actor" Type="nvarchar" MaxLength="100" Nullable="false" />
@@ -68,8 +68,8 @@ warning 6002: The table/view 'Datahantering.dbo.movie_actor' does not have a pri
         </EntityType>
         <EntityType Name="movie_actor">
           <Key>
-            <PropertyRef Name="movieID" />
             <PropertyRef Name="Actor" />
+            <PropertyRef Name="movieID" />
           </Key>
           <Property Name="movieID" Type="Int32" Nullable="false" />
           <Property Name="Actor" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
