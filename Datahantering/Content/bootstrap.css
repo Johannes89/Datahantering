@@ -784,8 +784,10 @@ pre code {
 }
 
 .row {
-  margin-right: -15px;
-  margin-left: -15px;
+    margin-right: -15px;
+    margin-left: -15px;
+
+
 }
 
 .row:before,
@@ -6813,4 +6815,17 @@ td.visible-print {
   td.hidden-print {
     display: none !important;
   }
+}
+
+.custom-row {
+    margin: auto;
+    max-width: 768px;
+}
+
+.custom-line {
+    max-width: 1170px;
+    border-bottom-style: solid;
+    border-bottom-color: deepskyblue;
+    border-bottom-width: thin;
+}
 }
