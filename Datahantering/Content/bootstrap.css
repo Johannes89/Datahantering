@@ -6828,4 +6828,7 @@ td.visible-print {
     border-bottom-color: deepskyblue;
     border-bottom-width: thin;
 }
+
+.custom-center {
+    text-align:center;
 }
