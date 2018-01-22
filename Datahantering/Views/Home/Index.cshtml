@@ -13,7 +13,7 @@
         <div class="col-md-3">
 
 
-            <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301865">Create Movie &raquo;</a></p>
+            <p><a class="btn btn-default" onclick="HideDiv()">Create Movie &raquo;</a></p>
         </div>
         <div class="col-md-3">
 
@@ -35,10 +35,27 @@
 <div class="custom-line"></div><br />
 <div class="custom-row">
     <div class="row">
-        <div class="custom-center">
-            <input type="text">
+        <div class="custom-field-center" id="custom-field">
+            <input type="text" placeholder="Movie name" id="moviename"><br />
+            <input type="text" placeholder="Grade" id="grade"><br />
+            <input type="text" placeholder="Lenght" id="length"><br />
+            <input type="text" placeholder="Summary" id="summary">
         </div>
-        </div>    
-
+    </div>    
 </div>
+
+<script>
+    function HideDiv()
+    {
+        var div = document.getElementById("custom-field");
+        if (div.style.display === "none")
+        {
+            div.style.display = "block";
+        }
+        else
+        {
+            div.style.display = "none";
+        }
+    }
+</script>
 
