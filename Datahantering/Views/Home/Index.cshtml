@@ -13,22 +13,22 @@
         <div class="col-md-3">
 
 
-            <p><a class="btn btn-default" onclick="HideDiv()">Create Movie &raquo;</a></p>
+            <p><a class="btn btn-default" onclick="ShowHideDiv('create')">Create Movie &raquo;</a></p>
         </div>
         <div class="col-md-3">
 
 
-            <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301866">Update Movie &raquo;</a></p>
+            <p><a class="btn btn-default" onclick="ShowHideDiv('update')">Update Movie &raquo;</a></p>
         </div>
         <div class="col-md-3">
 
 
-            <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301867">Delete Movie &raquo;</a></p>
+            <p><a class="btn btn-default" onclick="ShowHideDiv('delete')">Delete Movie &raquo;</a></p>
         </div>
         <div class="col-md-3">
 
 
-            <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301867">Show Movies &raquo;</a></p>
+            <p><a class="btn btn-default" onclick="ShowHideDiv('show')">Show Movies &raquo;</a></p>
         </div>
     </div>
 </div>
@@ -45,7 +45,7 @@
 </div>
 
 <script>
-    function HideDiv()
+    function ShowHideDiv()
     {
         var div = document.getElementById("custom-field");
         if (div.style.display === "none")
