@@ -787,7 +787,6 @@ pre code {
     margin-right: -15px;
     margin-left: -15px;
 
-
 }
 
 .row:before,
@@ -6819,7 +6818,8 @@ td.visible-print {
 
 .custom-row {
     margin: auto;
-    max-width: 768px;
+    max-width: 500px;
+
 }
 
 .custom-line {
@@ -6827,8 +6827,13 @@ td.visible-print {
     border-bottom-style: solid;
     border-bottom-color: deepskyblue;
     border-bottom-width: thin;
+
 }
 
 .custom-field-center {
     text-align:center;
+}
+
+.custom-center {
+    margin: auto;
 }

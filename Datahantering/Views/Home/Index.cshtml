@@ -7,44 +7,71 @@
     <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>
     <p><a href="https://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
 </div>
-
+<div class="custom-line"></div><br />
 <div class="custom-row" >
     <div class="row">
-        <div class="col-md-3">
+        <div class="custom-center">
+            <div class="col-md-7">
+                <p><a class="btn btn-default" id="btn_create">Create Movie &raquo;</a></p>
+            </div>
 
+            @*<div class="col-md-3">
+                <p><a class="btn btn-default" id="btn_update">Update Movie &raquo;</a></p>
+            </div>*@
 
-            <p><a class="btn btn-default" onclick="ShowHideDiv('create')">Create Movie &raquo;</a></p>
-        </div>
-        <div class="col-md-3">
+            @*<div class="col-md-3">
+                <p><a class="btn btn-default" onclick="ShowHideDiv('delete')">Delete Movie &raquo;</a></p>
+            </div>*@
 
-
-            <p><a class="btn btn-default" onclick="ShowHideDiv('update')">Update Movie &raquo;</a></p>
-        </div>
-        <div class="col-md-3">
-
-
-            <p><a class="btn btn-default" onclick="ShowHideDiv('delete')">Delete Movie &raquo;</a></p>
-        </div>
-        <div class="col-md-3">
-
-
-            <p><a class="btn btn-default" onclick="ShowHideDiv('show')">Show Movies &raquo;</a></p>
+            <div class="col-md-3">
+                <p><a class="btn btn-default" id="btn_show">Show Movies &raquo;</a></p>
+            </div>
         </div>
     </div>
 </div>
 <div class="custom-line"></div><br />
 <div class="custom-row">
     <div class="row">
-        <div class="custom-field-center" id="custom-field">
+        <div class="custom-field-center" id="custom-field-create">
             <input type="text" placeholder="Movie name" id="moviename"><br />
             <input type="text" placeholder="Grade" id="grade"><br />
             <input type="text" placeholder="Lenght" id="length"><br />
             <input type="text" placeholder="Summary" id="summary">
         </div>
+        <div class="custom-field-center" id="custom-field-show">
+            <input type="text" placeholder="LIST" id="movie_list"><br />
+
+        </div>
     </div>    
 </div>
 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script>
+    $(document).ready(function () {
+        $("#custom-field-create").hide();
+        $("#custom-field-show").hide();
+    });
+
+    $(document).ready(function () {
+        $("#btn_create").click(function () {
+            $("#custom-field-show").hide();
+            $("#custom-field-create").toggle();
+        });
+    });
+    $(document).ready(function () {
+        $("#btn_show").click(function () {
+            $("#custom-field-create").hide();
+            $("#custom-field-show").toggle();
+        });
+    });
+</script>
+
+
+
+
+
+
+@*<script>
     function ShowHideDiv()
     {
         var div = document.getElementById("custom-field");
@@ -57,5 +84,5 @@
             div.style.display = "none";
         }
     }
-</script>
+</script>*@
 
