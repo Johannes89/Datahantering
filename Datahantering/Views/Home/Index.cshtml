@@ -12,7 +12,7 @@
     <div class="row">
         <div class="custom-center">
             <div class="col-md-7">
-                <p><a class="btn btn-default" id="btn_create">Create Movie &raquo;</a></p>
+                <p><a class="btn btn-default" id="btn_create_show">Create Movie &raquo;</a></p>
             </div>
 
             @*<div class="col-md-3">
@@ -24,7 +24,7 @@
             </div>*@
 
             <div class="col-md-3">
-                <p><a class="btn btn-default" id="btn_show">Show Movies &raquo;</a></p>
+                <p><a class="btn btn-default" id="btn_show" onclick="location.href='@Url.Action("getMovies", "Movie")'">Show Movies &raquo;</a></p>
             </div>
         </div>
     </div>
@@ -53,7 +53,7 @@
     });
 
     $(document).ready(function () {
-        $("#btn_create").click(function () {
+        $("#btn_create_show").click(function () {
             $("#custom-field-show").hide();
             $("#custom-field-create").toggle();
         });
