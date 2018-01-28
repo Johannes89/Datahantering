@@ -24,19 +24,28 @@
             </div>*@
 
             <div class="col-md-3">
-                <p><a class="btn btn-default" id="btn_show" onclick="location.href='@Url.Action("getMovies", "Movie")'">Show Movies &raquo;</a></p>
+                <p><a class="btn btn-default" id="btn_show" onclick="location.href='@Url.Action("Movie", "Movie")'">Show Movies &raquo;</a></p>
             </div>
         </div>
     </div>
 </div>
 <div class="custom-line"></div><br />
+@model Datahantering.Models.movie_data
 <div class="custom-row">
     <div class="row">
         <div class="custom-field-center" id="custom-field-create">
-            <input type="text" placeholder="Movie name" id="moviename"><br />
+            @*<input type="text" placeholder="Movie name" id="moviename"><br />
             <input type="text" placeholder="Grade" id="grade"><br />
             <input type="text" placeholder="Lenght" id="length"><br />
             <input type="text" placeholder="Summary" id="summary">
+            <input type="text" placeholder="Actor 1" id="actorone" /><br />
+            <input type="text" placeholder="Actor 2" id="actortwo" /><br />*@
+            @Html.TextBoxFor(m => m.Name, new { @placeholder="Name"})<br />
+            @Html.TextBoxFor(m => m.Grade, new { @placeholder = "Grade" })<br />
+            @Html.TextBoxFor(m => m.Length, new { @placeholder = "Length" })<br />
+            @Html.TextBoxFor(m => m.Summary, new { @placeholder = "Summary" })<br />
+            @Html.TextBoxFor(m => m.movie_actor, new { @placeholder = "Actor 1" })<br />
+            @Html.TextBoxFor(m => m.movie_actor, new { @placeholder = "Actor 2" })<br />
         </div>
         <div class="custom-field-center" id="custom-field-show">
             <input type="text" placeholder="LIST" id="movie_list"><br />
