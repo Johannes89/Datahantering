@@ -4,16 +4,13 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="MovieModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'Datahantering.dbo.movie_actor' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+      <Schema Namespace="DatahanteringModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="movie_actor">
           <Key>
             <PropertyRef Name="Actor" />
-            <PropertyRef Name="movieID" />
           </Key>
           <Property Name="movieID" Type="int" Nullable="false" />
-          <Property Name="Actor" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Actor" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <EntityType Name="movie_data">
           <Key>
@@ -37,14 +34,9 @@ warning 6002: The table/view 'Datahantering.dbo.movie_actor' does not have a pri
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="MovieModelStoreContainer">
+        <EntityContainer Name="DatahanteringModelStoreContainer">
+          <EntitySet Name="movie_actor" EntityType="Self.movie_actor" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="movie_data" EntityType="Self.movie_data" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="movie_actor" EntityType="Self.movie_actor" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [movie_actor].[movieID] AS [movieID], 
-    [movie_actor].[Actor] AS [Actor]
-    FROM [dbo].[movie_actor] AS [movie_actor]</DefiningQuery>
-          </EntitySet>
           <AssociationSet Name="FK_movie_actor_movie_data" Association="Self.FK_movie_actor_movie_data">
             <End Role="movie_data" EntitySet="movie_data" />
             <End Role="movie_actor" EntitySet="movie_actor" />
@@ -54,7 +46,15 @@ warning 6002: The table/view 'Datahantering.dbo.movie_actor' does not have a pri
     </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
-      <Schema Namespace="MovieModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+      <Schema Namespace="DatahanteringModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="movie_actor">
+          <Key>
+            <PropertyRef Name="Actor" />
+          </Key>
+          <Property Name="movieID" Type="Int32" Nullable="false" />
+          <Property Name="Actor" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="movie_data" Relationship="Self.FK_movie_actor_movie_data" FromRole="movie_actor" ToRole="movie_data" />
+        </EntityType>
         <EntityType Name="movie_data">
           <Key>
             <PropertyRef Name="ID" />
@@ -65,15 +65,6 @@ warning 6002: The table/view 'Datahantering.dbo.movie_actor' does not have a pri
           <Property Name="Length" Type="Int32" Nullable="false" />
           <Property Name="Summary" Type="String" MaxLength="500" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="movie_actor" Relationship="Self.FK_movie_actor_movie_data" FromRole="movie_data" ToRole="movie_actor" />
-        </EntityType>
-        <EntityType Name="movie_actor">
-          <Key>
-            <PropertyRef Name="Actor" />
-            <PropertyRef Name="movieID" />
-          </Key>
-          <Property Name="movieID" Type="Int32" Nullable="false" />
-          <Property Name="Actor" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="movie_data" Relationship="Self.FK_movie_actor_movie_data" FromRole="movie_actor" ToRole="movie_data" />
         </EntityType>
         <Association Name="FK_movie_actor_movie_data">
           <End Role="movie_data" Type="Self.movie_data" Multiplicity="1" />
@@ -88,8 +79,8 @@ warning 6002: The table/view 'Datahantering.dbo.movie_actor' does not have a pri
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="DatahanteringEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="movie_data" EntityType="Self.movie_data" />
           <EntitySet Name="movie_actor" EntityType="Self.movie_actor" />
+          <EntitySet Name="movie_data" EntityType="Self.movie_data" />
           <AssociationSet Name="FK_movie_actor_movie_data" Association="Self.FK_movie_actor_movie_data">
             <End Role="movie_data" EntitySet="movie_data" />
             <End Role="movie_actor" EntitySet="movie_actor" />
@@ -100,23 +91,23 @@ warning 6002: The table/view 'Datahantering.dbo.movie_actor' does not have a pri
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="MovieModelStoreContainer" CdmEntityContainer="DatahanteringEntities">
+        <EntityContainerMapping StorageEntityContainer="DatahanteringModelStoreContainer" CdmEntityContainer="DatahanteringEntities">
+          <EntitySetMapping Name="movie_actor">
+            <EntityTypeMapping TypeName="DatahanteringModel.movie_actor">
+              <MappingFragment StoreEntitySet="movie_actor">
+                <ScalarProperty Name="movieID" ColumnName="movieID" />
+                <ScalarProperty Name="Actor" ColumnName="Actor" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="movie_data">
-            <EntityTypeMapping TypeName="MovieModel.movie_data">
+            <EntityTypeMapping TypeName="DatahanteringModel.movie_data">
               <MappingFragment StoreEntitySet="movie_data">
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Grade" ColumnName="Grade" />
                 <ScalarProperty Name="Length" ColumnName="Length" />
                 <ScalarProperty Name="Summary" ColumnName="Summary" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="movie_actor">
-            <EntityTypeMapping TypeName="MovieModel.movie_actor">
-              <MappingFragment StoreEntitySet="movie_actor">
-                <ScalarProperty Name="movieID" ColumnName="movieID" />
-                <ScalarProperty Name="Actor" ColumnName="Actor" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

@@ -56,6 +56,18 @@
       <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.3\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Ninject, Version=3.3.3.0, Culture=neutral, PublicKeyToken=c7192dc5380945e7, processorArchitecture=MSIL">
+      <HintPath>..\packages\Ninject.3.3.3\lib\net45\Ninject.dll</HintPath>
+    </Reference>
+    <Reference Include="Ninject.Web.Common, Version=3.3.0.0, Culture=neutral, PublicKeyToken=c7192dc5380945e7, processorArchitecture=MSIL">
+      <HintPath>..\packages\Ninject.Web.Common.3.3.0\lib\net45\Ninject.Web.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="Ninject.Web.Common.WebHost, Version=3.3.0.0, Culture=neutral, PublicKeyToken=c7192dc5380945e7, processorArchitecture=MSIL">
+      <HintPath>..\packages\Ninject.Web.Common.WebHost.3.3.0\lib\net45\Ninject.Web.Common.WebHost.dll</HintPath>
+    </Reference>
+    <Reference Include="Ninject.Web.Mvc, Version=3.3.0.0, Culture=neutral, PublicKeyToken=c7192dc5380945e7, processorArchitecture=MSIL">
+      <HintPath>..\packages\Ninject.MVC5.3.3.0\lib\net45\Ninject.Web.Mvc.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -154,27 +166,28 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\Movie.Context.cs">
+    <Compile Include="Models\Movies.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>Movie.Context.tt</DependentUpon>
+      <DependentUpon>Movies.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Movie.cs">
+    <Compile Include="Models\Movies.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>Movie.tt</DependentUpon>
+      <DependentUpon>Movies.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Movie.Designer.cs">
+    <Compile Include="Models\Movies.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>Movie.edmx</DependentUpon>
+      <DependentUpon>Movies.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\movie_actor.cs">
-      <DependentUpon>Movie.tt</DependentUpon>
+      <DependentUpon>Movies.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\movie_data.cs">
-      <DependentUpon>Movie.tt</DependentUpon>
+      <DependentUpon>Movies.tt</DependentUpon>
     </Compile>
+    <Compile Include="ViewModels\MovieViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -184,27 +197,27 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
-    <Content Include="Models\Movie.Context.tt">
+    <Content Include="Models\Movies.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>Movie.edmx</DependentUpon>
-      <LastGenOutput>Movie.Context.cs</LastGenOutput>
+      <DependentUpon>Movies.edmx</DependentUpon>
+      <LastGenOutput>Movies.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="Models\Movie.tt">
+    <Content Include="Models\Movies.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>Movie.edmx</DependentUpon>
-      <LastGenOutput>Movie.cs</LastGenOutput>
+      <DependentUpon>Movies.edmx</DependentUpon>
+      <LastGenOutput>Movies.cs</LastGenOutput>
     </Content>
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <EntityDeploy Include="Models\Movie.edmx">
+    <EntityDeploy Include="Models\Movies.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>Movie.Designer.cs</LastGenOutput>
+      <LastGenOutput>Movies.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <Content Include="Models\Movie.edmx.diagram">
-      <DependentUpon>Movie.edmx</DependentUpon>
+    <Content Include="Models\Movies.edmx.diagram">
+      <DependentUpon>Movies.edmx</DependentUpon>
     </Content>
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
@@ -234,6 +247,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Service\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

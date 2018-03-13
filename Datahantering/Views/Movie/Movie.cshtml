@@ -1,5 +1,5 @@
 ﻿@{
-    ViewBag.Title = "Home Page";
+    ViewBag.Title = "Get";
 }
 
 <div class="jumbotron">
@@ -24,33 +24,68 @@
             </div>*@
 
             <div class="col-md-3">
-                <p><a class="btn btn-default" id="btn_show" onclick="location.href='@Url.Action("Movie", "Movie")'">Show Movies &raquo;</a></p>
+                <p><a class="btn btn-default" id="btn_show" onclick="location.href='@Url.Action("Get", "Movie")'">Show Movies &raquo;</a></p>
             </div>
         </div>
     </div>
 </div>
 <div class="custom-line"></div><br />
-@model Datahantering.Models.movie_data
+@using Datahantering.Models
+@model IEnumerable<Datahantering.MovieViewModel>
 <div class="custom-row">
     <div class="row">
         <div class="custom-field-center" id="custom-field-create">
-            @*<input type="text" placeholder="Movie name" id="moviename"><br />
-            <input type="text" placeholder="Grade" id="grade"><br />
-            <input type="text" placeholder="Lenght" id="length"><br />
-            <input type="text" placeholder="Summary" id="summary">
-            <input type="text" placeholder="Actor 1" id="actorone" /><br />
-            <input type="text" placeholder="Actor 2" id="actortwo" /><br />*@
-            @Html.TextBoxFor(m => m.Name, new { @placeholder="Name"})<br />
-            @Html.TextBoxFor(m => m.Grade, new { @placeholder = "Grade" })<br />
-            @Html.TextBoxFor(m => m.Length, new { @placeholder = "Length" })<br />
-            @Html.TextBoxFor(m => m.Summary, new { @placeholder = "Summary" })<br />
-            @Html.TextBoxFor(m => m.movie_actor, new { @placeholder = "Actor 1" })<br />
-            @Html.TextBoxFor(m => m.movie_actor, new { @placeholder = "Actor 2" })<br />
+            @using (Html.BeginForm("Create", "Movie", FormMethod.Post))
+            {
+                @*@model MovieViewModel*@
+                <input type="text" placeholder="Movie name" id="moviename" name="name" ><br />
+                <input type="text" placeholder="Grade" id="grade" name="grade"><br />
+                <input type="text" placeholder="Lenght" id="length" name="length"><br />
+                <input type="text" placeholder="Summary" id="summary" name="summary">
+                <input type="text" placeholder="Actor 1" id="actorone" name="actor" /><br />
+                
+                @*@Html.TextBoxFor(m => m.Name, new { @placeholder = "Name" })<br />
+                @Html.TextBoxFor(m => m.Grade, new { @placeholder = "Grade" })<br />
+                @Html.TextBoxFor(m => m.Length, new { @placeholder = "Length" })<br />
+                @Html.TextBoxFor(m => m.Summary, new { @placeholder = "Summary" })<br />
+                @Html.TextBoxFor(m => m.Actor, new { @placeholder = "Actor" })<br />*@
+                @*<input type="text" name="actor_one" placeholder="Actor 1"/><br />*@
+                
+                @*@Model.movie_actor.Count
+                @Html.TextBoxFor(m => m.movie_actor, new { @placeholder = "Actor 1" })<br />
+                @Html.TextBoxFor(m => m.movie_actor, new { @placeholder = "Actor 2" })<br />*@
+            <input type="submit" id="btn_create" class="btn btn-default" value="Create Reptile" />
+            }
         </div>
+        @using (Html.BeginForm("Delete", "Movie", FormMethod.Post))
+        {
         <div class="custom-field-center" id="custom-field-show">
-            <input type="text" placeholder="LIST" id="movie_list"><br />
-
+            <table class="table table-bordered table img-responsive table-hover">
+                <tr>
+                    <th>Name</th>
+                    <th>Grade</th>
+                    <th>Length</th>
+                    <th>Summary</th>
+                    <th>Actor</th>
+                    <th>Change/Delete</th>
+                </tr>
+                @foreach (var m in Model)
+                {
+                    <tr>
+                        <td>@m.Name</td>
+                        <td>@m.Grade</td>
+                        <td>@m.Length</td>
+                        <td>@m.Summary</td>
+                        <td>@m.Actor</td>
+                        @*<td>@Html.RadioButton("isChecked", false)</td>*@
+                        <td><input type="checkbox" name="ids" value="@m.ID" /></td>
+                    </tr>
+                }
+            </table>
+            <input type="submit" id="btn_delete" class="btn btn-default" value="Delete movie" />
+            <input type="submit" id="btn_edit" class="btn btn-default" value="Edit movie" />
         </div>
+        }
     </div>    
 </div>
 
@@ -58,21 +93,23 @@
 <script>
     $(document).ready(function () {
         $("#custom-field-create").hide();
-        $("#custom-field-show").hide();
+     //   $("#custom-field-show").hide();
     });
 
     $(document).ready(function () {
         $("#btn_create_show").click(function () {
             $("#custom-field-show").hide();
+           // $("#custom-field-create").show();
             $("#custom-field-create").toggle();
         });
     });
-    $(document).ready(function () {
-        $("#btn_show").click(function () {
-            $("#custom-field-create").hide();
-            $("#custom-field-show").toggle();
-        });
-    });
+    //$(document).ready(function () {
+    //    $("#btn_show").click(function () {
+    //        $("#custom-field-create").hide();
+    //        $("#custom-field-show").show();
+    //        $("#custom-field-show").toggle();
+    //    });
+   // });
 </script>
 
 

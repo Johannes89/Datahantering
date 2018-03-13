@@ -18,5 +18,14 @@ namespace Datahantering.Models
         public string Actor { get; set; }
     
         public virtual movie_data movie_data { get; set; }
+
+        public movie_actor(string name)
+        {
+            this.Actor = name;
+        }
+        public movie_actor()
+        {
+
+        }
     }
 }
