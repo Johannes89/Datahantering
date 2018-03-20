@@ -2,6 +2,8 @@
 
 using System;
 using System.Collections.Generic;
+using System.Data;
+using System.Data.SqlClient;
 using System.Diagnostics;
 using System.Linq;
 using System.Web;
@@ -90,24 +92,57 @@ namespace Datahantering.Controllers
                 //var getMovie = from md in _db.movie_data
                 //            orderby md.Name
                 //            select md;
+                string sortBy = "Name";
+                 string query = null;
+                 using (SqlConnection conn = new SqlConnection())
+                 {
+                    query = "getMovieRows '"+sortBy+" desc'";
+                    conn.ConnectionString = "Data Source=DESKTOP-BPPIJVQ\\JDB;Initial Catalog=Datahantering;Integrated Security=True;";
+
+                    conn.Open();
+                    using(SqlCommand cmd = new SqlCommand("getMovieRows", conn))
+                    {
+
+                        cmd.Parameters.Add("@OrderByClause", SqlDbType.VarChar).Value = "Name desc";
+
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        using (SqlDataReader reader = cmd.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                MovieViewModel mvd = new MovieViewModel();
+                                mvd.ID = (int)reader["ID"];
+                                mvd.Name = reader["Name"].ToString();
+                                mvd.Grade = (int)reader["Grade"];
+                                mvd.Length = (int)reader["Length"];
+                                mvd.Summary = reader["Summary"].ToString();
+                                mvd.Actor = reader["Actor"].ToString();
+                                list.Add(mvd);
+                            }
+                            conn.Close();
+                        }
+                    }
+                 }
+                //    }
+                //}
 
 
-                var query = from md in _db.movie_data
-                            join ma in _db.movie_actor on md.ID equals ma.movieID
+                //var query = from md in _db.movie_data
+                //            join ma in _db.movie_actor on md.ID equals ma.movieID
 
-                            select new { md, ma };
-                foreach (var row in query)
-                {
-                    MovieViewModel mvd = new MovieViewModel();//{row.md.ID, row.md.Name, row.md.Grade, row.md.Length, row.md.Summary, row.ma.Actor.ToString() };
-                    mvd.ID = row.md.ID;
-                    mvd.Name = row.md.Name;
-                    mvd.Grade = row.md.Grade;
-                    mvd.Length = row.md.Length;
-                    mvd.Summary = row.md.Summary;
-                    mvd.Actor = row.ma.Actor;
+                //            select new { md, ma };
+                //foreach (var row in query)
+                //{
+                //    MovieViewModel mvd = new MovieViewModel();//{row.md.ID, row.md.Name, row.md.Grade, row.md.Length, row.md.Summary, row.ma.Actor.ToString() };
+                //    mvd.ID = row.md.ID;
+                //    mvd.Name = row.md.Name;
+                //    mvd.Grade = row.md.Grade;
+                //    mvd.Length = row.md.Length;
+                //    mvd.Summary = row.md.Summary;
+                //    mvd.Actor = row.ma.Actor;
 
-                    list.Add(mvd);
-                }
+                //    list.Add(mvd);
+                //}
 
                 //var query = from md in _db.movie_data
                 //            join ma in _db.movie_actor on md.ID equals ma.movieID
