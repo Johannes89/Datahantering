@@ -83,8 +83,24 @@ namespace Datahantering.Controllers
             return View();
         }
 
-        private List<MovieViewModel> getMovies()
+        public ActionResult Sort(FormCollection form)
         {
+            int val = Int32.Parse(form["SortBy"]);
+            List<MovieViewModel> list = getMovies(val);
+
+            return View("movie", list);
+        }
+
+        private List<MovieViewModel> getMovies(int? sortby= null)
+        {
+            String sortByParam = "Name";
+            if (sortby == 0)
+                sortByParam = "Name desc";
+            if (sortby == 1)
+                sortByParam = "Grade desc";
+            if (sortby == 2)
+                sortByParam = "Length desc";
+
             List<MovieViewModel> list = new List<MovieViewModel>();
             using (_db = new DatahanteringEntities())
             {
@@ -92,18 +108,18 @@ namespace Datahantering.Controllers
                 //var getMovie = from md in _db.movie_data
                 //            orderby md.Name
                 //            select md;
-                string sortBy = "Name";
+                //string sortBy = "Name";
                  string query = null;
                  using (SqlConnection conn = new SqlConnection())
                  {
-                    query = "getMovieRows '"+sortBy+" desc'";
+                    query = "getMovieRows '"+ sortByParam + " desc'";
                     conn.ConnectionString = "Data Source=DESKTOP-BPPIJVQ\\JDB;Initial Catalog=Datahantering;Integrated Security=True;";
 
                     conn.Open();
                     using(SqlCommand cmd = new SqlCommand("getMovieRows", conn))
                     {
 
-                        cmd.Parameters.Add("@OrderByClause", SqlDbType.VarChar).Value = "Name desc";
+                        cmd.Parameters.Add("@OrderByClause", SqlDbType.VarChar).Value = sortByParam;
 
                         cmd.CommandType = CommandType.StoredProcedure;
                         using (SqlDataReader reader = cmd.ExecuteReader())
