@@ -58,15 +58,20 @@ namespace Datahantering.Controllers
 
         public ActionResult Delete(int[] ids)
         {
-            movie_data md = new movie_data() { ID = ids[0] };
-            
-            using (_db = new DatahanteringEntities())
+            if(ids != null)
             {
-                _db.movie_data.Attach(md);
-                _db.movie_data.Remove(_db.movie_data.Single(m => m.ID == md.ID));
-                _db.SaveChanges();
+                movie_data md = new movie_data() { ID = ids[0] };
+
+                using (_db = new DatahanteringEntities())
+                {
+                    _db.movie_data.Attach(md);
+                    _db.movie_data.Remove(_db.movie_data.Single(m => m.ID == md.ID));
+                    _db.SaveChanges();
+                }
+                
             }
             List<MovieViewModel> list = getMovies();
+
             return View("movie",list);
         }
         public ActionResult About()
