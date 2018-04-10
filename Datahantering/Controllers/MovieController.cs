@@ -100,11 +100,11 @@ namespace Datahantering.Controllers
         {
             String sortByParam = "Name";
             if (sortby == 0)
-                sortByParam = "Name desc";
+                sortByParam = "Name asc";
             if (sortby == 1)
-                sortByParam = "Grade desc";
+                sortByParam = "Grade asc";
             if (sortby == 2)
-                sortByParam = "Length desc";
+                sortByParam = "Length asc";
 
             List<MovieViewModel> list = new List<MovieViewModel>();
             using (_db = new DatahanteringEntities())
@@ -117,7 +117,7 @@ namespace Datahantering.Controllers
                  string query = null;
                  using (SqlConnection conn = new SqlConnection())
                  {
-                    query = "getMovieRows '"+ sortByParam + " desc'";
+                    query = "getMovieRows '"+ sortByParam + " asc'";
                     conn.ConnectionString = "Data Source=DESKTOP-BPPIJVQ\\JDB;Initial Catalog=Datahantering;Integrated Security=True;";
 
                     conn.Open();
